@@ -27,7 +27,7 @@ void initClock() {
 }
 
 void printDayOfWeek() {
-  lcd.setCursor(0, 0);
+  lcd.setCursor(2, 0);
   lcd.print(rtc.getDOWStr(FORMAT_SHORT));
 }
 
