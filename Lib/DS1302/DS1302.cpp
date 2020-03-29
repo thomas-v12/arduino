@@ -134,7 +134,7 @@ char *DS1302::getTimeStr(uint8_t format)
 
 char *DS1302::getDateStr(uint8_t slformat, uint8_t eformat, char divider)
 {
-	char *output= "xxxxxxxxxx";
+	char *output= slformat ? "xxxxxxxx" : "xxxxxxxxxx";
 	int yr, offset;
 	Time t;
 	t=getTime();
@@ -249,35 +249,33 @@ char *DS1302::getDateStr(uint8_t slformat, uint8_t eformat, char divider)
 
 char *DS1302::getDOWStr(uint8_t format)
 {
-	char *output= "xxxxxxxxx";
+	char *output= format == FORMAT_SHORT ? "xxx" : "xxxxxxxxx";
 	Time t;
 	t=getTime();
 	switch (t.dow)
 	{
 		case MONDAY:
-			output="Monday";
+			output = format == FORMAT_SHORT ? "Mon" : "Monday";
 			break;
 		case TUESDAY:
-			output="Tuesday";
+			output = format == FORMAT_SHORT ? "Tue" : "Tuesday";
 			break;
 		case WEDNESDAY:
-			output="Wednesday";
+			output = format == FORMAT_SHORT ? "Wed" : "Wednesday";
 			break;
 		case THURSDAY:
-			output="Thursday";
+			output = format == FORMAT_SHORT ? "Thu" : "Thursday";
 			break;
 		case FRIDAY:
-			output="Friday";
+			output = format == FORMAT_SHORT ? "Fri" : "Friday";
 			break;
 		case SATURDAY:
-			output="Saturday";
+			output = format == FORMAT_SHORT ? "Sat" : "Saturday";
 			break;
 		case SUNDAY:
-			output="Sunday";
+			output = format == FORMAT_SHORT ? "Sun" : "Sunday";
 			break;
 	}     
-	if (format==FORMAT_SHORT)
-		output[3]=0;
 	return output;
 }
 
