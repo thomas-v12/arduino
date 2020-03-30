@@ -134,10 +134,12 @@ char *DS1302::getTimeStr(uint8_t format)
 
 char *DS1302::getDateStr(uint8_t slformat, uint8_t eformat, char divider)
 {
-	char *output= slformat ? "xxxxxxxx" : "xxxxxxxxxx";
+	int cnt = slformat == FORMAT_SHORT ? 8 : 10;
+	char *output = malloc((cnt+1) * sizeof(char));
 	int yr, offset;
 	Time t;
 	t=getTime();
+
 	switch (eformat)
 	{
 		case FORMAT_LITTLEENDIAN:
